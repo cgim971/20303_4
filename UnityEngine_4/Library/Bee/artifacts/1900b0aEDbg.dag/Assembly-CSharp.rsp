@@ -338,9 +338,14 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
-"Assets/02.Scripts/CameraController.cs"
+"Assets/02.Scripts/Camera/CameraController.cs"
+"Assets/02.Scripts/Enemy.cs"
 "Assets/02.Scripts/GameManager.cs"
+"Assets/02.Scripts/MonsterSpawn.cs"
+"Assets/02.Scripts/Player/Attack.cs"
 "Assets/02.Scripts/Player/PlayerMovement.cs"
+"Assets/Destroyed_city_FREE/Standard Assets/Character Controllers/Sources/Scripts/MouseLook.cs"
+"Assets/Destroyed_city_FREE/Standard Assets/Water (Pro Only)/Sources/Scripts/Water.cs"
 -langversion:9.0
 
 /deterministic
