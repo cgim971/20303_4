@@ -340,7 +340,7 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/02.Scripts/CameraController.cs"
 "Assets/02.Scripts/GameManager.cs"
-"Assets/02.Scripts/PlayerController.cs"
+"Assets/02.Scripts/Player/PlayerMovement.cs"
 -langversion:9.0
 
 /deterministic

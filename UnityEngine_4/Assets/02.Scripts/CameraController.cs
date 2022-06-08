@@ -5,30 +5,48 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    Camera cam;
 
-    public Transform _camTransform;
-    float _mouseX;
-    float _mouseY;
+    [SerializeField] private Transform _camTransform;
+
+    [SerializeField] private float _sensX;
+    [SerializeField] private float _sensY;
+
+    float mouseX;
+    float mouseY;
+
+    float _xRotation;
+    float _yRotation;
+
+    float multiplier = 0.01f;
+
+    private void Start()
+    {
+        cam = GetComponent<Camera>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     private void Update()
     {
-        RotateCamera();
+        MyInput();
+
+
+        transform.localEulerAngles = new Vector3(_xRotation, _yRotation, 0);
+        _camTransform.parent.localEulerAngles = new Vector3(0, _yRotation, 0);
     }
 
-    private void RotateCamera()
+    private void MyInput()
     {
         transform.position = _camTransform.position;
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
 
-        _mouseX = mouseX + transform.localEulerAngles.y;
-        _mouseX = (_mouseX > 180f) ? _mouseX - 360f : _mouseX;
+        _yRotation += mouseX * _sensX * multiplier;
+        _xRotation -= mouseY * _sensY * multiplier;
 
-        _mouseY = _mouseY + mouseY;
-        _mouseY = (_mouseY > 180f) ? _mouseY - 360f : _mouseY;
-
-        transform.localEulerAngles = new Vector3(-_mouseY, _mouseX, 0);
-        _camTransform.parent.eulerAngles = new Vector3(0, _mouseX, 0);
+        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
     }
 }
