@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Enemy
   - Box
+  - PlayerAtk
   layers:
   - Default
   - TransparentFX
