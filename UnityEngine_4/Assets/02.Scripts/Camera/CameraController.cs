@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     float _xRotation;
     float _yRotation;
 
-    float multiplier = 0.01f;
+    float _multiplier = 0.01f;
 
     private void Start()
     {
@@ -32,6 +32,9 @@ public class CameraController : MonoBehaviour
         _camTransform.parent.localEulerAngles = new Vector3(0, _yRotation, 0);
     }
 
+    /// <summary>
+    /// Input Mouse
+    /// </summary>
     private void MyInput()
     {
         transform.position = _camTransform.position;
@@ -39,8 +42,8 @@ public class CameraController : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
 
-        _yRotation += mouseX * _sensX * multiplier;
-        _xRotation -= mouseY * _sensY * multiplier;
+        _yRotation += mouseX * _sensX * _multiplier;
+        _xRotation -= mouseY * _sensY * _multiplier;
 
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
     }

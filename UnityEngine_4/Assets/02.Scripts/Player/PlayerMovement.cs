@@ -10,7 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _characterController;
 
     public float _speed = 5f;
+    public float _jumpPower = 8f;
+    public float _gravity = 20f;
+    Vector3 moveAmount = Vector3.zero;
+
     float _vecGravity = 0;
+    bool _isJumping = false;
 
     private void Start()
     {
@@ -40,21 +45,22 @@ public class PlayerMovement : MonoBehaviour
         targetDirection.Normalize();
 
         Vector3 vecGravity = new Vector3(0, _vecGravity, 0);
-        Vector3 moveAmount = targetDirection * _speed * Time.deltaTime;
+        moveAmount = targetDirection * _speed;
         moveAmount += vecGravity;
 
-        _characterController.Move(moveAmount);
+        _characterController.Move(moveAmount * Time.deltaTime);
     }
 
     void SetGravity()
     {
+
         if (_characterController.isGrounded)
         {
             _vecGravity = 0;
         }
         else
         {
-            _vecGravity -= 9.8f * Time.deltaTime;
+            _vecGravity -= _gravity * Time.deltaTime;
         }
     }
 }
