@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class JombieMovement : MonoBehaviour
 {
@@ -37,10 +38,6 @@ public class JombieMovement : MonoBehaviour
     public int hp = 100;
     //해골 공격 거리
     public float AtkRange = 1.5f;
-    //해골 피격 이펙트
-    public GameObject effectDamage = null;
-    //해골 다이 이펙트
-    public GameObject effectDie = null;
 
     private SkinnedMeshRenderer skinnedMeshRenderer = null;
 
@@ -53,9 +50,6 @@ public class JombieMovement : MonoBehaviour
     void OnDieAnmationFinished()
     {
         Debug.Log("Die Animation finished");
-
-        //몬스터 죽음 이벤트 
-        //Instantiate(effectDie, skullTransform.position, Quaternion.identity);
 
         //몬스터 삭제 
         Destroy(gameObject);
@@ -340,11 +334,7 @@ public class JombieMovement : MonoBehaviour
             hp -= 10;
             if (hp > 0)
             {
-                //피격 이펙트 
-                //Instantiate(effectDamage, other.transform.position, Quaternion.identity);
 
-                //피격 트위닝 이펙트
-                effectDamageTween();
             }
             else
             {
@@ -353,40 +343,4 @@ public class JombieMovement : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
-    /// 피격시 몬스터 몸에서 번쩍번쩍 효과를 준다
-    /// </summary>
-    void effectDamageTween()
-    {
-        ////트윈을 돌리다 또 트윈 함수가 진행되면 로직이 엉망이 될 수 있어서 
-        ////트윈 중복 체크로 미리 차단을 해준다
-        //if (effectTweener != null && effectTweener.isComplete == false)
-        //{
-        //    return;
-        //}
-
-        ////번쩍이는 이펙트 색상을 지정해준다
-        //Color colorTo = Color.red;
-
-        ////트윈의 타겟은 스킨매쉬랜더러, 시간은 0.2초, 파라메터로는 색상 , 반복. 콜백함수
-        //effectTweener = HOTween.To(skinnedMeshRenderer, 0.2f, new TweenParms()
-        //                        //색상을 교체
-        //                        .Prop("color", colorTo)
-        //                        // 반복은 1번만 요요를 안쓰면 빨강색 1회 흰색 1회 해야 한다. 
-        //                        .Loops(1, LoopType.Yoyo)
-        //                        //피격 이펙트 종료시 이벤트 함수 호출
-        //                        .OnStepComplete(OnDamageTweenFinished)
-        //    );
-    }
-
-    /// <summary>
-    /// 피격이펙트 종료시 이벤트 함수 호출
-    /// </summary>
-    void OnDamageTweenFinished()
-    {
-        //트윈이 끝나면 하얀색으로 확실히 색상을 돌려준다
-        skinnedMeshRenderer.material.color = Color.white;
-    }
-
 }

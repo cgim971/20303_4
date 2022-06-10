@@ -5,46 +5,36 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform _camTransform;
+    public Transform objTarget = null;
 
-    [SerializeField] private float _sensX;
-    [SerializeField] private float _sensY;
+    public float distance = 6.0f;
+    public float height = 1.75f;
+    public float heightDamping = 2.0f;
+    public float rotationDamping = 3.0f;
 
-    float mouseX;
-    float mouseY;
-
-    float _xRotation;
-    float _yRotation;
-
-    float _multiplier = 0.01f;
-
-    private void Start()
+    void ThirdCamera()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        float objTargetRotationAngle = objTarget.eulerAngles.y;
+        float objHeight = objTarget.position.y + height;
+        float nowRotationAngle = transform.eulerAngles.y;
+        float nowHeight = transform.position.y;
+
+        nowRotationAngle = Mathf.LerpAngle(nowRotationAngle, objTargetRotationAngle, rotationDamping * Time.deltaTime);
+
+        nowHeight = Mathf.Lerp(nowHeight, objHeight, heightDamping * Time.deltaTime);
+
+        Quaternion nowRotation = Quaternion.Euler(0f, nowRotationAngle, 0f);
+
+        transform.position = objTarget.position;
+        transform.position -= nowRotation * Vector3.forward * distance;
+
+        transform.position = new Vector3(transform.position.x, nowHeight, transform.position.z);
+
+        transform.LookAt(objTarget);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        MyInput();
-
-        transform.localEulerAngles = new Vector3(_xRotation, _yRotation, 0);
-        _camTransform.parent.localEulerAngles = new Vector3(0, _yRotation, 0);
-    }
-
-    /// <summary>
-    /// Input Mouse
-    /// </summary>
-    private void MyInput()
-    {
-        transform.position = _camTransform.position;
-
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
-
-        _yRotation += mouseX * _sensX * _multiplier;
-        _xRotation -= mouseY * _sensY * _multiplier;
-
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+        ThirdCamera();
     }
 }

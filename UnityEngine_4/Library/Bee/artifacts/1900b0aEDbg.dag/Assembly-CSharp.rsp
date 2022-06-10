@@ -343,7 +343,7 @@
 "Assets/02.Scripts/Enemy/JombieMovement.cs"
 "Assets/02.Scripts/GameManager.cs"
 "Assets/02.Scripts/Player/PlayerMovement.cs"
-"Assets/02.Scripts/Player/Sword.cs"
+"Assets/02.Scripts/spawMonster.cs"
 "Assets/_Assets/Destroyed_city_FREE/Standard Assets/Character Controllers/Sources/Scripts/MouseLook.cs"
 "Assets/_Assets/Destroyed_city_FREE/Standard Assets/Water (Pro Only)/Sources/Scripts/Water.cs"
 -langversion:9.0
