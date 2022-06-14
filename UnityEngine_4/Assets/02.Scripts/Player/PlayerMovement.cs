@@ -111,6 +111,11 @@ public class PlayerMovement : MonoBehaviour
         vecMoveDirection = Vector3.RotateTowards(vecMoveDirection, targetDirection, rotateMoveSpd * Mathf.Deg2Rad * Time.deltaTime, 1000.0f);
         vecMoveDirection = vecMoveDirection.normalized;
 
+        if (Input.GetButtonDown("Jump") && _vecGravity == 0)
+        {
+            targetDirection.y = 5f;
+        }
+
         Vector3 vecGravity = new Vector3(0, _vecGravity, 0);
         _currentSpeed = _walkSpeed;
         if (_isRush) _currentSpeed = _rush;
